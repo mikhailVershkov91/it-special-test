@@ -1,0 +1,11 @@
+.tableContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #eee6e6;
+}
+
+.table {
+	/* height: 400px; */
+	width: 90%;
+}
