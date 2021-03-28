@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunkMiddleware from "redux-thunk";
+import infoReducer from "./info-reducer";
 
 let rootReducer = combineReducers({
 	info: infoReducer,
