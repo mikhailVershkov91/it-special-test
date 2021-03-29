@@ -1,30 +1,27 @@
 import React from "react";
 import s from "./Info.module.css";
 
-const Info = () => {
+const Info = ({ rowData }) => {
 	return (
 		<div className={s.info}>
 			<div className={s.info__container}>
 				<div>
-					<span>User selected:</span> {}
+					<span>User selected:</span> {rowData.id}
 				</div>
 				<div>
-					<span>Description:</span> Lorem ipsum dolor sit amet consectetur
-					adipisicing elit. Qui necessitatibus molestiae omnis tempora eos cum
-					et itaque recusandae quod. Perspiciatis veritatis quae possimus rem
-					sequi eius adipisci illum dicta placeat?
+					<span>Description:</span> {rowData.description}
 				</div>
 				<div>
-					<span>Address:</span> {}
+					<span>Address:</span> {rowData.adress.streetAddress}
 				</div>
 				<div>
-					<span>City:</span> {}
+					<span>City:</span> {rowData.adress.city}
 				</div>
 				<div>
-					<span>State:</span> {}
+					<span>State:</span> {rowData.adress.state}
 				</div>
 				<div>
-					<span>Zip code:</span> {}
+					<span>Zip code:</span> {rowData.adress.zip}
 				</div>
 			</div>
 		</div>

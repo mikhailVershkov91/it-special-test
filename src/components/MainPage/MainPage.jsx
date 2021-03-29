@@ -5,16 +5,10 @@ import Header from "../Header/Header";
 import Search from "../Search/Search";
 import s from "./MainPage.module.css";
 import TableComponent from "../Table/TableComponent";
-import PaginationComponent from "../Pagination/PaginationComponent";
-import Info from "../Info/Info";
 
 const MainPage = () => {
 	const dispatch = useDispatch();
 	const info = useSelector((state) => state.info.info);
-
-	// const getDataHandler = () => {
-	// 	dispatch(getInfo());
-	// };
 
 	useEffect(() => {
 		dispatch(getInfo());
@@ -24,10 +18,10 @@ const MainPage = () => {
 		<div className={s.main}>
 			<Header />
 			<Search />
+			{/* {info.map((item) => (
+				// <TableComponent info={info} key={item.id + item.phone} />
+			))} */}
 			<TableComponent info={info} />
-			<PaginationComponent />
-			<Info />
-			{/* <button onClick={getDataHandler}>Получить данные</button> */}
 		</div>
 	);
 };

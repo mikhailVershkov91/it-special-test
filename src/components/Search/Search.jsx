@@ -8,11 +8,10 @@ import { useDispatch, useSelector } from "react-redux";
 const Search = () => {
 	const [text, setText] = useState("");
 	const dispatch = useDispatch();
-	// const filteredInfo = useSelector((state) => state.info.filteredInfo);
-	// console.log(filteredInfo);
 
 	const findHandler = () => {
 		dispatch(findInfoAC(text));
+		setText("");
 	};
 
 	const onChangeHandler = (e) => {
@@ -28,6 +27,7 @@ const Search = () => {
 					label="Search"
 					variant="outlined"
 					onChange={onChangeHandler}
+					value={text}
 				/>
 				<Button
 					className={s.input__button}
@@ -36,6 +36,13 @@ const Search = () => {
 				>
 					Find
 				</Button>
+				{/* <Button
+					className={s.input__button}
+					variant="contained"
+					onClick={}
+				>
+					Back
+				</Button> */}
 			</div>
 		</form>
 	);

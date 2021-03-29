@@ -20,37 +20,21 @@ const infoReducer = (state = initialState, action) => {
 		case FILTERED_INFO: {
 			return {
 				...state,
-				info:
-					state.info.filter((item) => {
-						let flag;
-						for (let prop in item) {
-							flag = false;
-							flag = item[prop].toString().indexOf(action.inputText) > -1;
-							if (flag) break;
-						}
-						return flag;
-					})
-				// if (action.inputText === undefined || action.inputText === "") {
-				// 	return state.info;
-				// }
-
-				// 	info: state.info.filter((item) => {
-
-				// 		let flag;
-				// 		for (let prop in item) {
-				// 			flag = false;
-				// 			flag = item[prop].toString().indexOf(action.inputText) > -1;
-				// 			if (flag) break;
-				// 		}
-				// 		return flag;
-				// 	}),
-				// };
+				info: state.info.filter((item) => {
+					let flag;
+					for (let prop in item) {
+						flag = false;
+						flag = item[prop].toString().indexOf(action.inputText) > -1;
+						if (flag) break;
+					}
+					return flag;
+				}),
 			};
 		}
 		case SELECTED_ROW: {
 			return {
 				...state,
-				info: action.info,
+				selectedRow: action.rowData,
 			};
 		}
 		default:
@@ -68,9 +52,9 @@ export const findInfoAC = (inputText) => ({
 	inputText,
 });
 
-export const selectedRowAC = (inputText) => ({
+export const selectedRowAC = (rowData) => ({
 	type: SELECTED_ROW,
-	inputText,
+	rowData,
 });
 
 export const getInfo = () => {

@@ -1,6 +1,10 @@
 import React from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import s from "./TableComponent.module.css";
+import PaginationComponent from "../Pagination/PaginationComponent";
+import Info from "../Info/Info";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedRowAC } from "../../store/info-reducer";
 
 const columns = [
 	{ field: "id", headerName: "ID", width: 60 },
@@ -14,23 +18,28 @@ const columns = [
 
 const TableComponent = (props) => {
 	const data = props.info;
+	const dispatch = useDispatch();
+	const rowData = useSelector((state) => state.info.selectedRow);
 
-	// const rowSelectedHandler = (params) => {
-	// 	console.log(params);
-	// 	console.log("Clicked");
-	// };
+	const rowSelectedHandler = (row) => {
+		dispatch(selectedRowAC(row.data));
+	};
 
 	return (
-		<DataGrid
-			className={s.table}
-			rows={data}
-			columns={columns}
-			hideFooterPagination="false"
-			disableColumnMenu="false"
-			autoHeight="true"
-			pageSize={15}
-			// onRowClick={() => rowSelectedHandler(params)}
-		/>
+		<>
+			<DataGrid
+				className={s.table}
+				rows={data}
+				columns={columns}
+				hideFooterPagination="false"
+				disableColumnMenu="false"
+				autoHeight="true"
+				pageSize={15}
+				onRowSelected={rowSelectedHandler}
+			/>
+			<PaginationComponent />
+			{rowData.adress && <Info rowData={rowData} />}
+		</>
 	);
 };
 
