@@ -9,7 +9,7 @@ import { selectedRowAC } from "../../store/info-reducer";
 const columns = [
 	{
 		field: "id",
-		headerName: "id",
+		headerName: "ID",
 		width: 60,
 		valueGetter: (params) => `${params.row.id}`,
 	},
@@ -64,23 +64,6 @@ const TableComponent = () => {
 	const to = currentPage * perPage;
 	let paginatedData = [...data].slice(from, to);
 
-	// const arrayUnique = (data) => {
-	// 	return data.filter((e, i, a) => a.indexOf(e) == i);
-	// };
-
-	// let key = Math.random();
-	// console.log(key);
-
-	// const fixedData = data.map((item, index) => {
-	// 	if(item.id = )
-	// })
-
-	// const json = data.map(item => {
-
-	// }
-	// JSON.stringify(data);
-	// console.log(json);
-
 	if (filteredData.length) {
 		paginatedData = filteredData;
 	}
@@ -93,12 +76,8 @@ const TableComponent = () => {
 		<>
 			<DataGrid
 				className={s.table}
-				// getRowId={(r) => r.id}
-				// key={data.id + data.phone}
+				getRowId={(r) => r.id}
 				rows={paginatedData}
-				// rows={data.map((item) => (
-				// 	<tr key={item.id + item.phone} />
-				// ))}
 				columns={columns}
 				hideFooterPagination="false"
 				disableColumnMenu="false"
