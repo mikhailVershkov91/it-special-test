@@ -7,13 +7,49 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectedRowAC } from "../../store/info-reducer";
 
 const columns = [
-	{ field: "id", headerName: "ID", width: 60 },
-	{ field: "firstName", headerName: "First name", width: 150 },
-	{ field: "lastName", headerName: "Last name", width: 150 },
-	{ field: "email", headerName: "Email", width: 150 },
-	{ field: "phone", headerName: "Phone", width: 150 },
-	{ field: "adress", headerName: "Address", width: 150 },
-	{ field: "description", headerName: "Description", width: 484 },
+	{
+		field: "id",
+		headerName: "id",
+		width: 60,
+		valueGetter: (params) => `${params.row.id}`,
+	},
+	{
+		field: "firstName",
+		headerName: "First name",
+		width: 150,
+		valueGetter: (params) => `${params.row.firstName}`,
+	},
+	{
+		field: "lastName",
+		headerName: "Last name",
+		width: 150,
+		valueGetter: (params) => `${params.row.lastName}`,
+	},
+	{
+		field: "email",
+		headerName: "Email",
+		width: 150,
+		valueGetter: (params) => `${params.row.email}`,
+	},
+	{
+		field: "phone",
+		headerName: "Phone",
+		width: 150,
+		valueGetter: (params) => `${params.row.phone}`,
+	},
+	{
+		field: "adress",
+		headerName: "Address",
+		width: 150,
+		valueGetter: (params) =>
+			`${params.row.adress.city}, ${params.row.adress.streetAddress}`,
+	},
+	{
+		field: "description",
+		headerName: "Description",
+		width: 484,
+		valueGetter: (params) => `${params.row.description}`,
+	},
 ];
 
 const TableComponent = () => {
@@ -21,9 +57,32 @@ const TableComponent = () => {
 	let data = useSelector((state) => state.info.info);
 	let filteredData = useSelector((state) => state.info.filteredInfo);
 	const rowData = useSelector((state) => state.info.selectedRow);
+	const currentPage = useSelector((state) => state.info.currentPage);
+	const perPage = useSelector((state) => state.info.perPage);
+
+	const from = currentPage * perPage - perPage;
+	const to = currentPage * perPage;
+	let paginatedData = [...data].slice(from, to);
+
+	// const arrayUnique = (data) => {
+	// 	return data.filter((e, i, a) => a.indexOf(e) == i);
+	// };
+
+	// let key = Math.random();
+	// console.log(key);
+
+	// const fixedData = data.map((item, index) => {
+	// 	if(item.id = )
+	// })
+
+	// const json = data.map(item => {
+
+	// }
+	// JSON.stringify(data);
+	// console.log(json);
 
 	if (filteredData.length) {
-		data = filteredData;
+		paginatedData = filteredData;
 	}
 
 	const rowSelectedHandler = (row) => {
@@ -34,7 +93,9 @@ const TableComponent = () => {
 		<>
 			<DataGrid
 				className={s.table}
-				rows={data}
+				// getRowId={(r) => r.id}
+				// key={data.id + data.phone}
+				rows={paginatedData}
 				// rows={data.map((item) => (
 				// 	<tr key={item.id + item.phone} />
 				// ))}
@@ -42,91 +103,14 @@ const TableComponent = () => {
 				hideFooterPagination="false"
 				disableColumnMenu="false"
 				autoHeight="true"
-				pageSize={15}
+				hideFooter="true"
+				pageSize={perPage}
 				onRowSelected={rowSelectedHandler}
 			/>
-			<PaginationComponent />
+			<PaginationComponent perPage={perPage} data={data} />
 			{rowData.adress && <Info rowData={rowData} />}
 		</>
 	);
 };
 
 export default TableComponent;
-
-// const rows = [
-// 	{
-// 		id: 95,
-// 		firstName: "Edith",
-// 		lastName: "Ellington",
-// 	},
-// 	{
-// 		id: 293,
-// 		firstName: "Alisa",
-// 		lastName: "Bealka",
-// 	},
-// 	{
-// 		id: 132,
-// 		firstName: "Petya",
-// 		lastName: "Voroncov",
-// 	},
-// 	{
-// 		id: 454,
-// 		firstName: "Kolya",
-// 		lastName: "Bunek",
-// 	},
-// 	{
-// 		id: 99,
-// 		firstName: "Masha",
-// 		lastName: "Artushev",
-// 	},
-// 	{
-// 		id: 12,
-// 		firstName: "Misha",
-// 		lastName: "Ivanov",
-// 	},
-// 	{
-// 		id: 43,
-// 		firstName: "Vova",
-// 		lastName: "Petrov",
-// 	},
-// 	{
-// 		id: 22,
-// 		firstName: "Evgen",
-// 		lastName: "Sidorov",
-// 	},
-// 	{
-// 		id: 54,
-// 		firstName: "Max",
-// 		lastName: "Kononenko",
-// 	},
-// 	{
-// 		id: 23,
-// 		firstName: "Tima",
-// 		lastName: "Van",
-// 	},
-// 	{
-// 		id: 667,
-// 		firstName: "Andrey",
-// 		lastName: "Dreling",
-// 	},
-// 	{
-// 		id: 324,
-// 		firstName: "Marat",
-// 		lastName: "Kondratyev",
-// 	},
-// 	{
-// 		id: 154,
-// 		firstName: "Oleg",
-// 		lastName: "Maximov",
-// 	},
-// 	{
-// 		id: 674,
-// 		firstName: "Vera",
-// 		lastName: "Shatc",
-// 	},
-// 	{
-// 		id: 389,
-// 		firstName: "Dasha",
-// 		lastName: "Yau",
-// 	},
-// ];

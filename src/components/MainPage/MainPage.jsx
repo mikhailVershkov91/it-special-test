@@ -19,9 +19,6 @@ const MainPage = () => {
 		<div className={s.main}>
 			<Header />
 			<Search />
-			{/* {info.map((item) => (
-				// <TableComponent info={info} key={item.id + item.phone} />
-			))} */}
 			{isFetching ? <Preloader /> : <TableComponent />}
 		</div>
 	);

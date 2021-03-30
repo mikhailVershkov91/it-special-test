@@ -5,12 +5,15 @@ export const CLEAR_FILTERED_INFO = "CLEAR_FILTERED_INFO";
 export const FILTERED_INFO = "FILTERED_INFO";
 export const SELECTED_ROW = "SELECTED_ROW";
 export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+export const TOGGLE_CURRENT_PAGE = "TOGGLE_CURRENT_PAGE";
 
 const initialState = {
 	info: [],
 	filteredInfo: [],
 	selectedRow: [],
 	isFetching: true,
+	perPage: 25,
+	currentPage: 1,
 };
 
 const infoReducer = (state = initialState, action) => {
@@ -25,6 +28,12 @@ const infoReducer = (state = initialState, action) => {
 			return {
 				...state,
 				filteredInfo: [],
+			};
+		}
+		case TOGGLE_CURRENT_PAGE: {
+			return {
+				...state,
+				currentPage: action.currentPage,
 			};
 		}
 		case FILTERED_INFO: {
@@ -80,6 +89,11 @@ export const selectedRowAC = (rowData) => ({
 export const toggleIsFetching = (isFetching) => ({
 	type: TOGGLE_IS_FETCHING,
 	isFetching,
+});
+
+export const toggleCurrentPageAC = (currentPage) => ({
+	type: TOGGLE_CURRENT_PAGE,
+	currentPage,
 });
 
 export const getInfo = () => {

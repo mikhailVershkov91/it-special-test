@@ -6,7 +6,8 @@ const Info = ({ rowData }) => {
 		<div className={s.info}>
 			<div className={s.info__container}>
 				<div>
-					<span>User selected:</span> {rowData.id}
+					<span>User selected:</span>{" "}
+					{`${rowData.firstName} ${rowData.lastName}`}
 				</div>
 				<div>
 					<span>Description:</span> {rowData.description}
