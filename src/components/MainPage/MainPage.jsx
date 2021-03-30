@@ -5,10 +5,11 @@ import Header from "../Header/Header";
 import Search from "../Search/Search";
 import s from "./MainPage.module.css";
 import TableComponent from "../Table/TableComponent";
+import Preloader from "../Preloader/Preloader";
 
 const MainPage = () => {
 	const dispatch = useDispatch();
-	const info = useSelector((state) => state.info.info);
+	const isFetching = useSelector((state) => state.info.isFetching);
 
 	useEffect(() => {
 		dispatch(getInfo());
@@ -21,7 +22,7 @@ const MainPage = () => {
 			{/* {info.map((item) => (
 				// <TableComponent info={info} key={item.id + item.phone} />
 			))} */}
-			<TableComponent info={info} />
+			{isFetching ? <Preloader /> : <TableComponent />}
 		</div>
 	);
 };

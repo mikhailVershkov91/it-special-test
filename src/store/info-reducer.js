@@ -1,12 +1,16 @@
 import { dataAPI } from "../axios/axios";
 
 export const GET_INFO = "GET_INFO";
+export const CLEAR_FILTERED_INFO = "CLEAR_FILTERED_INFO";
 export const FILTERED_INFO = "FILTERED_INFO";
 export const SELECTED_ROW = "SELECTED_ROW";
+export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 const initialState = {
 	info: [],
+	filteredInfo: [],
 	selectedRow: [],
+	isFetching: true,
 };
 
 const infoReducer = (state = initialState, action) => {
@@ -17,10 +21,16 @@ const infoReducer = (state = initialState, action) => {
 				info: action.info,
 			};
 		}
+		case CLEAR_FILTERED_INFO: {
+			return {
+				...state,
+				filteredInfo: [],
+			};
+		}
 		case FILTERED_INFO: {
 			return {
 				...state,
-				info: state.info.filter((item) => {
+				filteredInfo: state.info.filter((item) => {
 					let flag;
 					for (let prop in item) {
 						flag = false;
@@ -37,6 +47,12 @@ const infoReducer = (state = initialState, action) => {
 				selectedRow: action.rowData,
 			};
 		}
+		case TOGGLE_IS_FETCHING: {
+			return {
+				...state,
+				isFetching: action.isFetching,
+			};
+		}
 		default:
 			return state;
 	}
@@ -45,6 +61,10 @@ const infoReducer = (state = initialState, action) => {
 export const getInfoAC = (info) => ({
 	type: GET_INFO,
 	info,
+});
+
+export const clearFilteredInfoAC = () => ({
+	type: CLEAR_FILTERED_INFO,
 });
 
 export const findInfoAC = (inputText) => ({
@@ -57,11 +77,18 @@ export const selectedRowAC = (rowData) => ({
 	rowData,
 });
 
+export const toggleIsFetching = (isFetching) => ({
+	type: TOGGLE_IS_FETCHING,
+	isFetching,
+});
+
 export const getInfo = () => {
 	return async (dispatch) => {
+		dispatch(toggleIsFetching(true));
 		const response = await dataAPI.getData();
 		console.log(response);
 		dispatch(getInfoAC(response));
+		dispatch(toggleIsFetching(false));
 	};
 };
 

@@ -16,10 +16,15 @@ const columns = [
 	{ field: "description", headerName: "Description", width: 484 },
 ];
 
-const TableComponent = (props) => {
-	const data = props.info;
+const TableComponent = () => {
 	const dispatch = useDispatch();
+	let data = useSelector((state) => state.info.info);
+	let filteredData = useSelector((state) => state.info.filteredInfo);
 	const rowData = useSelector((state) => state.info.selectedRow);
+
+	if (filteredData.length) {
+		data = filteredData;
+	}
 
 	const rowSelectedHandler = (row) => {
 		dispatch(selectedRowAC(row.data));
@@ -30,6 +35,9 @@ const TableComponent = (props) => {
 			<DataGrid
 				className={s.table}
 				rows={data}
+				// rows={data.map((item) => (
+				// 	<tr key={item.id + item.phone} />
+				// ))}
 				columns={columns}
 				hideFooterPagination="false"
 				disableColumnMenu="false"
