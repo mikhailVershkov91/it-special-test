@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/it-special-test/static/css/main.063417af.chunk.css",
+    "main.js": "/it-special-test/static/js/main.6696338a.chunk.js",
+    "main.js.map": "/it-special-test/static/js/main.6696338a.chunk.js.map",
+    "runtime-main.js": "/it-special-test/static/js/runtime-main.a9143215.js",
+    "runtime-main.js.map": "/it-special-test/static/js/runtime-main.a9143215.js.map",
+    "static/js/2.5b3ab4c2.chunk.js": "/it-special-test/static/js/2.5b3ab4c2.chunk.js",
+    "static/js/2.5b3ab4c2.chunk.js.map": "/it-special-test/static/js/2.5b3ab4c2.chunk.js.map",
+    "static/js/3.c040ba91.chunk.js": "/it-special-test/static/js/3.c040ba91.chunk.js",
+    "static/js/3.c040ba91.chunk.js.map": "/it-special-test/static/js/3.c040ba91.chunk.js.map",
+    "index.html": "/it-special-test/index.html",
+    "static/css/main.063417af.chunk.css.map": "/it-special-test/static/css/main.063417af.chunk.css.map",
+    "static/js/2.5b3ab4c2.chunk.js.LICENSE.txt": "/it-special-test/static/js/2.5b3ab4c2.chunk.js.LICENSE.txt",
+    "static/media/github1.345dc4a2.png": "/it-special-test/static/media/github1.345dc4a2.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a9143215.js",
+    "static/js/2.5b3ab4c2.chunk.js",
+    "static/css/main.063417af.chunk.css",
+    "static/js/main.6696338a.chunk.js"
+  ]
+}
